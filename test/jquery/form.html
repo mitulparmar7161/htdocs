@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form</title>
+        <link rel="stylesheet" href="form.css">
+        <script src="form.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+      <div class="row">
+    <div class="col-md-12">
+      <form name="myform" id="myform"  >
+    
+          
+        
+          <label for="name">Name:</label>
+          <p id="uname" style="color: red;"></P>
+          <input type="text" id="name" name="name" placeholder="Enter Your Name">
+
+
+          <label for="email">Email:</label>
+          <p id="uemail" style="color: red;"></p>
+          <input type="text" id="email" name="email" placeholder="Enter Your Email" >
+       
+
+          
+          <label for="contact">Contact</label>
+          <p id="ucontact" style="color: red;"></p>
+
+          <input type="text" id="contact" name="contact" placeholder="Enter Your Contact Number"  maxlength="10">
+        
+          <label>Age:</label>
+          <p id="uage" style="color: red;"></p>
+          <input type="radio" id="age" value="under_18" name="age"><label for="under_18" class="light" >Under 18</label><br>
+          <input type="radio" id="age" value="over_18" name="age"><label for="over_18" class="light" >Over 18</label><br>
+          
+       
+       
+          <br>
+         <label for="address">Address:</label>
+         <p id="uaddress" style="color: red;"></p><br>
+          <textarea id="address" name="address" placeholder="Enter Your Address"></textarea>
+        
+       
+        
+         <label for="Gender">Gender:</label>
+         <p id="ugender" style="color: red;"></p>
+          <select id="gender" name="gender" >
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          
+          <label>Hobbies:</label>
+          <p id="uhobbies" style="color: red;"></p>
+          <input type="checkbox" id="programing" value="programing" name="hobbies[]">Programing
+          <input type="checkbox" id="gamming" value="gamming" name="hobbies[]">Gamming
+          <input type="checkbox" id="music" value="music" name="hobbies[]">Music
+          <input type="checkbox" id="designing" value="designing" name="hobbies[]">Designing <br>
+            <br>
+
+          <label for="profile" >Profile Picture</label>
+          <p id="uprofile" style="color: red;"></p>
+          <input type="file" name="profile" id="profile" accept=".jpg, .jpeg, .png" >
+          
+          
+
+          <label for="date">Date</label>
+          <p id="udate" style="color: red;"></p>
+          <input type="date" name="date" id="date">
+          <p id="utime" style="color: red;"></p>
+          <label for="time">Time</label>
+          <input type="time" name="time" id="time">
+
+        <button type="submit" id="submit">Submit</button>
+        
+       </form>
+        </div>
+      </div>
+
+
+
+
+
+
+      <script>
+        var Vemail =/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,8}\b$/i;
+        var $FullNameRegEx = /^([a-zA-Z ]{2,40})$/;
+        var Vcontact=/^\d{10}$/;
+$(document).ready(function() {
+// Valid Name
+
+
+ let Ename = true;
+  $('#name').blur(function(){
+    validname();  
+  });
+
+  function validname(){
+        $("#uname").empty();
+    if($("#name").val()=="" || $("#name").val()==null){
+      $("#uname").html("(*) Name required..!!");
+      $("#name").focus();
+      Ename=false;
+    }
+  
+  }
+
+
+// Valid Email
+let Eemail = true;
+
+  $('#email').blur(function(){
+    vallidemail();
+    
+  });
+
+  function vallidemail(){
+    $("#uemail").empty();
+    var email=$('#email').val();
+    if($('#email').val()=="" || $('#email').val()==null){
+      $("#uemail").html("(*) email required..!!");
+      $("#email").focus();
+      Eemail=false;
+    }
+    else if(!Vemail.test(email)){
+      $("#uemail").html("(*) Invalid Email");
+      $("#email").focus();
+      Eemail=false;
+    }
+  
+  }
+
+// Valid Contact
+
+let Econtact = true;
+  $('#contact').blur(function(){
+    validcontact();
+  });
+  
+  function validcontact(){
+    $("#ucontact").empty();
+    var contact=$('#contact').val();
+    if($("#contact").val()=="" || $("#contact").val()==null){
+      $("#ucontact").html("(*) contact required..!!");
+      $("#contact").focus();
+      Econtact=false;
+    }
+    else if(!Vcontact.test(contact)){
+      $("#ucontact").html("(*) Invalid Contact");
+      $("#contact").focus();
+      Econtact=false;
+    }
+
+  }
+
+
+// valid age
+
+
+let Eage = true;
+function validage(){
+  $("#uage").empty();
+    if($('input[name="age"]:checked').length==0){
+      $("#uage").html("(*) Age required..!!");
+      $('input[name="age"]').focus();
+      Eage=false;
+    }
+
+}
+
+
+// Valid Address
+
+let Eaddress = true;
+  $('#address').blur(function(){
+
+    validaddress();
+  });
+
+function validaddress(){
+  
+  $("#uaddress").empty();
+    if($("#address").val()=="" || $("#address").val()==null){
+      $("#uaddress").html("(*) Address required..!!");
+      $("#address").focus();
+      Eaddress=false;
+    }
+
+}
+
+// valid Gender
+
+let Egender = true;
+  $('#gender').blur(function(){
+
+    validgender();
+    
+  });
+
+function validgender(){
+  $("#ugender").empty();
+    if($('#gender').val()=="" || $('#gender').val()==null){
+      $("#ugender").html("(*) Gender required..!!");
+      $("#gender").focus();
+      Egender=false;
+    }
+
+}
+
+// valid profile
+
+let Eprofile = true;
+  $('#profile').blur(function(){
+    validprofile();
+    
+  });
+
+  function validprofile(){
+    $("#uprofile").empty();
+    if($('#profile').val()=="" || $('#profile').val()==null){
+      $("#uprofile").html("(*) ProfilePic required..!!");
+      $("#profile").focus();
+      Eprofile=false;
+    }
+
+  }
+
+// valid date
+
+let Edate = true;
+
+$('#date').blur(function(){
+
+validdate();
+
+});
+
+function validdate(){
+    $("#udate").empty();
+    if($('#date').val()=="" || $('#date').val()==null){
+      $("#udate").html("(*)Date required..!!");
+      $("#date").focus();
+      Edate =false;
+    }
+
+  }
+
+  
+// valid Time
+
+let Etime = true;
+
+$('#time').blur(function(){
+
+validtime();
+
+});
+
+function validtime(){
+    $("#utime").empty();
+    if($('#time').val()=="" || $('#time').val()==null){
+      $("#utime").html("(*) Time required..!!");
+      $("#time").focus();
+      Etime=false;
+    }
+  }
+
+
+  // suubmit validation
+$("#submit").click(function(){
+
+  validname();
+  vallidemail();
+  validcontact();
+  validage();
+  validaddress();
+  validgender();
+  validprofile();
+  validdate();
+  validtime();
+
+  if(Ename == true && Eemail == true && Econtact && Eage == true && Eaddress == true && Egender === true && Eprofile == true && Edate == true && Etime == true){
+    return true;
+  }
+  else{
+    return false;
+  }
+
+
+
+});
+
+
+
+});
+      </script>
+    </body>
+</html>
